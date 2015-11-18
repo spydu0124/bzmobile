@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="house">
+	<!-- 查询区域信息 -->
+	<select id="queryHouseDomain" resultType="com.dxsoft.bzhouse.model.SysDomainEntity" parameterType="com.dxsoft.bzhouse.model.QueryEntity">
+		select * from mo_sys_domain where type_key='ISSUE_AREA'
+	</select>
+	<insert id="insertIssueRentingHouse"  parameterType="com.dxsoft.bzhouse.model.HouseInfoEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into 
+				MO_HOUSE_INFO(
+					ID,USERID,H_USERNAME,H_RELEASE_TYPE,H_IDENTITY,H_TELEPHONE,H_HOUSENAME ,
+            		H_ADDRESS,H_DISTRICT,H_HOUSE_TYPE,H_HOUSE_AREA,H_HOUSE_PRICE,
+            		H_ESTATE_SUPPORTING_FACILITY,H_STATE,H_STATE_DATE,H_TITLE,H_ISPASSED
+            	)
+       values
+       			(#{id},#{userId},#{hUserName},#{hReleaseType},'1',#{hTelephone},#{hHouseName},#{hAddress},
+       			#{hDisTrict},#{hHouseType},#{hHouseArea},#{hHousePrice},#{hEstateSupportingFacility},
+       			'0',to_date(#{hStateDate},'yyyy-MM-dd hh24:mi:ss'),#{hTitle},'0')
+	</insert>
+	<select id="queryHouseInfo" resultType="com.dxsoft.bzhouse.model.HouseInfoEntity" parameterType="com.dxsoft.bzhouse.model.QueryEntity">
+		select * from MO_HOUSE_INFO  order by H_state_date desc
+	</select>
+</mapper>

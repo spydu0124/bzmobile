@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="login">
+	<!-- 根据用户名和密码查询用户信息 -->
+	<select id="queryLoginInfo" resultType="com.dxsoft.bzhouse.model.SysUserinfo" parameterType="com.dxsoft.bzhouse.model.SysUserinfo">
+		SELECT * FROM MO_SYS_USERINFO WHERE USERID=#{userid} and PASSWD=#{passwd}
+	</select>
+	<insert id="insertUserInfo" parameterType="com.dxsoft.bzhouse.model.SysUserinfo">
+		insert into MO_SYS_USERINFO(sid,USERID,PASSWD,REG_TIME,MOBILE) 
+		values(#{sid},#{userid},#{passwd},#{regTime},#{mobile})
+	</insert>
+</mapper>
